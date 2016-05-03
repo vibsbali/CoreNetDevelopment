@@ -1,4 +1,6 @@
-﻿using CoreNetDevelopment.Services.RestaurantData;
+﻿using CoreNetDevelopment.Services.Greeting;
+using CoreNetDevelopment.Services.RestaurantData;
+using CoreNetDevelopment.ViewModels;
 using Microsoft.AspNet.Mvc;
 
 namespace CoreNetDevelopment.Controllers
@@ -6,16 +8,25 @@ namespace CoreNetDevelopment.Controllers
     public class HomeController : Controller
     {
         private readonly IRestaurantData restaurantData;
+        private readonly IGreeter greeter;
 
-        public HomeController(IRestaurantData restaurantData)
+        public HomeController(IRestaurantData restaurantData, IGreeter greeter)
         {
             this.restaurantData = restaurantData;
+            this.greeter = greeter;
         }
 
         public object Index()
         {
             var restaurants = restaurantData.GetAll();
-            return View(restaurants);
+            var greeting = greeter.GetGreeting();
+
+            var model = new HomeViewModel
+            {
+                CurrentGreeting = greeting,
+                Restaurants = restaurants
+            };
+            return View(model);
         }
     }
 }
