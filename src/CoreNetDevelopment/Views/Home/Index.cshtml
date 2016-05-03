@@ -14,6 +14,7 @@
             <tr>
                 <td>@restaurant.Id</td>
                 <td>@restaurant.Name</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = @restaurant.Id})</td>
             </tr>
         }
     </table>

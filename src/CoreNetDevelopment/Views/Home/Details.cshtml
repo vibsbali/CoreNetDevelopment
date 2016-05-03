@@ -6,8 +6,12 @@
     <title>@Model.Name</title>
 </head>
 <body>
-<h1>Welcome!</h1>
-    @Model.Name
+    <h1>Welcome!</h1>
+    <h1>@Model.Name</h1>
+
+<div>
+    @Html.ActionLink("Go to Home", "Index", "Home")
+</div>
 </body>
 
 </html>
