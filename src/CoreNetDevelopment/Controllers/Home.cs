@@ -31,7 +31,8 @@ namespace CoreNetDevelopment.Controllers
 
         public ActionResult Details(int id)
         {
-            return Content(id.ToString());
+            var model = restaurantData.Get(id);
+            return View(model);
         }
     }
 }
