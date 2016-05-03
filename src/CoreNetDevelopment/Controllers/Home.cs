@@ -16,7 +16,7 @@ namespace CoreNetDevelopment.Controllers
             this.greeter = greeter;
         }
 
-        public object Index()
+        public ActionResult Index()
         {
             var restaurants = restaurantData.GetAll();
             var greeting = greeter.GetGreeting();
@@ -27,6 +27,11 @@ namespace CoreNetDevelopment.Controllers
                 Restaurants = restaurants
             };
             return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View();
         }
     }
 }
