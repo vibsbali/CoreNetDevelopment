@@ -3,6 +3,7 @@ using CoreNetDevelopment.Services;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -41,15 +42,20 @@ namespace CoreNetDevelopment
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseFileServer();
+            app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(ConfigureRoutes);
 
             app.Run(async (context) =>
             {
                 var greeting = greeter.GetGreeting();
                 await context.Response.WriteAsync(greeting);
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
         }
 
         // Entry point for the application.
