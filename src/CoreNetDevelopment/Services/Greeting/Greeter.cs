@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace CoreNetDevelopment.Services
+namespace CoreNetDevelopment.Services.Greeting
 {
     public class Greeter : IGreeter
     {
