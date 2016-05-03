@@ -1,5 +1,6 @@
 ﻿using System;
 using CoreNetDevelopment.Services;
+using CoreNetDevelopment.Services.Greeting;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
