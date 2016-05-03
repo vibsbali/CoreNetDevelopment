@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CoreNetDevelopment.Models;
 
 namespace CoreNetDevelopment.Services.RestaurantData
@@ -20,6 +21,11 @@ namespace CoreNetDevelopment.Services.RestaurantData
         public IEnumerable<Restaurant> GetAll()
         {
             return Restaurants;
+        }
+
+        public Restaurant Get(int id)
+        {
+            return Restaurants.FirstOrDefault(i => i.Id == id);
         }
     }
 }

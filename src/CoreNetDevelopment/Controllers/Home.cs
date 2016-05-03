@@ -31,7 +31,7 @@ namespace CoreNetDevelopment.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            return Content(id.ToString());
         }
     }
 }
