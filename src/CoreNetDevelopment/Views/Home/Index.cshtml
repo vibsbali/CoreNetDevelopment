@@ -1,4 +1,4 @@
-﻿@model CoreNetDevelopment.Models.Restaurant
+﻿@model IEnumerable<CoreNetDevelopment.Models.Restaurant>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,16 @@
 </head>
 <body>
     <h1>Welcome!</h1>
-    <div>
-        @Model.Name
-    </div>
+    <table>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.Id</td>
+                <td>@restaurant.Name</td>
+            </tr>
+        }
+    </table>
 
 </body>
+
 </html>

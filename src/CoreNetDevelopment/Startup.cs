@@ -1,7 +1,9 @@
 ﻿using System;
 using CoreNetDevelopment.Services;
 using CoreNetDevelopment.Services.Greeting;
+using CoreNetDevelopment.Services.RestaurantData;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.DataProtection.Repositories;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Routing;
@@ -12,7 +14,7 @@ namespace CoreNetDevelopment
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; private set; }
+        public IConfiguration Configuration { get; }
 
         public Startup()
         {
@@ -29,7 +31,7 @@ namespace CoreNetDevelopment
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
-            
+            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
