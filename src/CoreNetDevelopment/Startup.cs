@@ -1,9 +1,6 @@
-﻿using System;
-using CoreNetDevelopment.Services;
-using CoreNetDevelopment.Services.Greeting;
+﻿using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.DataProtection.Repositories;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Routing;
