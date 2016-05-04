@@ -1,4 +1,5 @@
-﻿using CoreNetDevelopment.Services.Greeting;
+﻿using System.Threading.Tasks;
+using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using CoreNetDevelopment.ViewModels;
 using Microsoft.AspNet.Mvc;
@@ -29,14 +30,16 @@ namespace CoreNetDevelopment.Controllers
             return View(model);
         }
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            var model = restaurantData.Get(id);
+            var model = await restaurantData.GetAsync(id);
             if (model == null)
             {
                 return RedirectToAction("Index");
             }
             return View(model);
         }
+
+
     }
 }

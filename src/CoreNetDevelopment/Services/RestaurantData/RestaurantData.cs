@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreNetDevelopment.Models;
 
 namespace CoreNetDevelopment.Services.RestaurantData
@@ -23,9 +24,12 @@ namespace CoreNetDevelopment.Services.RestaurantData
             return Restaurants;
         }
 
-        public Restaurant Get(int id)
+        public Task<Restaurant> GetAsync(int id)
         {
-            return Restaurants.FirstOrDefault(i => i.Id == id);
+            return Task.Run(
+                () => {
+                return Restaurants.FirstOrDefault(i => i.Id == id);
+            });
         }
     }
 }

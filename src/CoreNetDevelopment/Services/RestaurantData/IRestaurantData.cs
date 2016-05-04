@@ -9,6 +9,6 @@ namespace CoreNetDevelopment.Services.RestaurantData
     public interface IRestaurantData
     {
         IEnumerable<Restaurant> GetAll();
-        Restaurant Get(int id);
+        Task<Restaurant> GetAsync(int id);
     }
 }
