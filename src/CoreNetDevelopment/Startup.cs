@@ -1,9 +1,11 @@
-﻿using CoreNetDevelopment.Services.Greeting;
+﻿using CoreNetDevelopment.Services.DataLayer;
+using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Routing;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,10 +27,19 @@ namespace CoreNetDevelopment
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<OdeToFoodDbContext>(options =>
+                {
+                    options.UseSqlServer(Configuration["database:connectionString"]);
+                });
+                    
+
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
