@@ -40,6 +40,10 @@ namespace CoreNetDevelopment.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
 
     }
 }

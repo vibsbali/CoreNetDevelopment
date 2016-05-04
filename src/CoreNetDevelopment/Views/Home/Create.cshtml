@@ -1,0 +1,29 @@
+﻿@using CoreNetDevelopment.Models
+@model CoreNetDevelopment.Models.Restaurant
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Create</title>
+</head>
+<body>
+    <h1>Create a new restaurant</h1>
+
+    @using(Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(r => r.Name)
+            @Html.EditorFor(r => r.Name)
+        </div>
+        <div>
+            @Html.LabelFor(r => r.CuisineType)
+            @Html.DropDownListFor(r => r.CuisineType, Html.GetEnumSelectList(typeof (CuisineType)))
+        </div>
+        <div>
+            <input type="submit" value="Create" />
+        </div>
+    }
+</body>
+
+</html>
