@@ -1,24 +1,23 @@
 ﻿@model CoreNetDevelopment.ViewModels.HomeViewModel
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Home</title>
-</head>
-<body>
+
 <h1>Welcome!</h1>
-    <h3>@Model.CurrentGreeting</h3>
-    <table>
+<h3>@Model.CurrentGreeting</h3>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var restaurant in Model.Restaurants)
         {
             <tr>
                 <td>@restaurant.Id</td>
                 <td>@restaurant.Name</td>
-                <td>@Html.ActionLink("Details", "Details", new { id = @restaurant.Id})</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = @restaurant.Id })</td>
             </tr>
         }
-    </table>
-
-</body>
-
-</html>
+    </tbody>
+</table>
