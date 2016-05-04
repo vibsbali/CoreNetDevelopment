@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CoreNetDevelopment.Models;
 using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using CoreNetDevelopment.ViewModels;
@@ -40,8 +41,29 @@ namespace CoreNetDevelopment.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(RestaurantEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var restaurant = new Restaurant
+                {
+                    Name = model.Name,
+                    CuisineType = model.CuisineType
+                };
+
+                var result = await restaurantData.AddAsync(restaurant);
+                if (result > 0)
+                {
+                    return RedirectToAction("Details", "Home", new {id = restaurant.Id});
+                }
+            }
             return View();
         }
 

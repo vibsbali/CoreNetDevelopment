@@ -7,9 +7,9 @@ namespace CoreNetDevelopment.Services.RestaurantData
 {
     public class InMemoryRestaurantData : IRestaurantData
     {
-        public static IEnumerable<Restaurant> Restaurants { get; set; }
+        public List<Restaurant> Restaurants { get; set; }
 
-        static InMemoryRestaurantData()
+        public InMemoryRestaurantData()
         {
             Restaurants = new List<Restaurant>
             {
@@ -29,6 +29,16 @@ namespace CoreNetDevelopment.Services.RestaurantData
             return Task.Run(
                 () => {
                 return Restaurants.FirstOrDefault(i => i.Id == id);
+            });
+        }
+
+        public Task<int> AddAsync(Restaurant restaurant)
+        {
+            return Task.Run(() =>
+            {
+                restaurant.Id = Restaurants.Max(r => r.Id) + 1;
+                Restaurants.Add(restaurant);
+                return 1;
             });
         }
     }

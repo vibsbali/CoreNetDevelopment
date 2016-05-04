@@ -10,5 +10,6 @@ namespace CoreNetDevelopment.Services.RestaurantData
     {
         IEnumerable<Restaurant> GetAll();
         Task<Restaurant> GetAsync(int id);
+        Task<int> AddAsync(Restaurant restaurant);
     }
 }
