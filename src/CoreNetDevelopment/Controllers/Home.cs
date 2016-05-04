@@ -3,7 +3,9 @@ using CoreNetDevelopment.Models;
 using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using CoreNetDevelopment.ViewModels;
+using JetBrains.Annotations;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity.Query.Expressions;
 
 namespace CoreNetDevelopment.Controllers
 {
@@ -12,7 +14,7 @@ namespace CoreNetDevelopment.Controllers
         private readonly IRestaurantData restaurantData;
         private readonly IGreeter greeter;
 
-        public HomeController(IRestaurantData restaurantData, IGreeter greeter)
+        public HomeController([NotNull]IRestaurantData restaurantData,[NotNull] IGreeter greeter)
         {
             this.restaurantData = restaurantData;
             this.greeter = greeter;
