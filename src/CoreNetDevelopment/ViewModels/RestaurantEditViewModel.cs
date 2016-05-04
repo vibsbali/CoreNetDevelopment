@@ -5,7 +5,7 @@ namespace CoreNetDevelopment.ViewModels
 {
     public class RestaurantEditViewModel
     {
-        [Required]
+        [Required][MaxLength(80)][MinLength(4)]
         public string Name { get; set; }
         public CuisineType CuisineType { get; set; }
     }

@@ -15,6 +15,7 @@
         <div>
             @Html.LabelFor(r => r.Name)
             @Html.EditorFor(r => r.Name)
+            <span>@Html.ValidationMessageFor(r => r.Name)</span>
         </div>
         <div>
             @Html.LabelFor(r => r.CuisineType)
