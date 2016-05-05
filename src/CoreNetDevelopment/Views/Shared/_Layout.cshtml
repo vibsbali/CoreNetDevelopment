@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -7,16 +8,32 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body class="container">
-    <div>
-        @RenderBody()
-    </div>
-    <footer>
-        @RenderSection("footer", false)
-        @Component.Invoke("Greeting")
-    </footer>
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    @RenderSection("scripts", false)
+<div>
+    @if (User.IsSignedIn())
+    {
+        <div>@User.GetUserName()</div>
+        <form method="POST" asp-action="Logout" asp-controller="Account">
+            <input type="submit" value="Logout" />
+        </form>
+    }
+    else
+    {
+        <div class="pull-right" style="margin-top: 10px">
+            <a class="btn btn-sm btn-primary" asp-controller="Account" asp-action="Login">Login</a>
+            <a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Register">Register</a>
+        </div>
+    }
+</div>
+<div>
+    @RenderBody()
+</div>
+<footer>
+    @RenderSection("footer", false)
+    @Component.Invoke("Greeting")
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+@RenderSection("scripts", false)
 </body>
 </html>
