@@ -4,19 +4,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body class="container">
     <div>
         @RenderBody()
     </div>
     <footer>
-        @RenderSection("footer", false);
+        @RenderSection("footer", false)
     </footer>
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    @RenderSection("scripts", false);
+    @RenderSection("scripts", false)
 </body>
 </html>
