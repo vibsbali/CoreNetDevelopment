@@ -18,16 +18,35 @@ namespace CoreNetDevelopment.Controllers
             this.signInManager = signInManager;
         }
 
-        public IActionResult Login()
+        [HttpGet]
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            var model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl
+            };
+            return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Login(string returnUrl)
-        //{
-            
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrWhiteSpace(vm.ReturnUrl))
+                    {
+                        return RedirectToAction(vm.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View();
+        }
 
         public IActionResult Register()
         {
@@ -35,6 +54,7 @@ namespace CoreNetDevelopment.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (ModelState.IsValid)
@@ -56,6 +76,14 @@ namespace CoreNetDevelopment.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

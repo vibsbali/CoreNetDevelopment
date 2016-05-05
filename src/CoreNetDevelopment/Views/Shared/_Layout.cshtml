@@ -11,10 +11,12 @@
 <div>
     @if (User.IsSignedIn())
     {
-        <div>@User.GetUserName()</div>
-        <form method="POST" asp-action="Logout" asp-controller="Account">
-            <input type="submit" value="Logout" />
-        </form>
+        <div>
+            <span>Welcome </span>@User.GetUserName()
+            <form method="POST" asp-action="Logout" asp-controller="Account">
+                <input class="btn btn-sm btn-danger" type="submit" value="Logout" />
+            </form>
+        </div>
     }
     else
     {
