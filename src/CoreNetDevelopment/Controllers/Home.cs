@@ -4,10 +4,13 @@ using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using CoreNetDevelopment.ViewModels;
 using JetBrains.Annotations;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreNetDevelopment.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IRestaurantData restaurantData;
@@ -19,6 +22,7 @@ namespace CoreNetDevelopment.Controllers
             this.greeter = greeter;
         }
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var restaurants = restaurantData.GetAll();

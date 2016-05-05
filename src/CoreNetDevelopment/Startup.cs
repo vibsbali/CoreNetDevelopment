@@ -1,9 +1,11 @@
-﻿using CoreNetDevelopment.Services.DataLayer;
+﻿using CoreNetDevelopment.Models;
+using CoreNetDevelopment.Services.DataLayer;
 using CoreNetDevelopment.Services.Greeting;
 using CoreNetDevelopment.Services.RestaurantData;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Routing;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +41,8 @@ namespace CoreNetDevelopment
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<OdeToFoodDbContext>();
 
         }
 
@@ -54,6 +58,8 @@ namespace CoreNetDevelopment
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(ConfigureRoutes);
 
