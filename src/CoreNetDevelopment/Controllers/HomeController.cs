@@ -36,6 +36,7 @@ namespace CoreNetDevelopment.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
             var model = await restaurantData.GetAsync(id);
@@ -72,6 +73,7 @@ namespace CoreNetDevelopment.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await restaurantData.GetAsync(id);

@@ -2,11 +2,13 @@
 
 @{
     ViewBag.Title = "Login Screen";
+    ViewBag.routeValue = "";
 }
 
 <h1>Login</h1>
+
 <div>
-    <form asp-controller="Account" asp-action="Login" method="POST">
+    <form  method="post" asp-controller="Account" asp-action="Login">
         <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
 
         <div>
@@ -19,7 +21,11 @@
             <input asp-for="Password"/>
             <span asp-validation-for="Password"></span>
         </div>
-        <input type="submit" value="Login"/>
+        <input hidden="" asp-for="ReturnUrl" />
+        <div>
+            <input type="submit" value="Login" />    
+        </div>
+        
     </form>
 </div>
 

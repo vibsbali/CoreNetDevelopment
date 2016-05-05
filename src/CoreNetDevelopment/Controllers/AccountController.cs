@@ -2,24 +2,23 @@
 using CoreNetDevelopment.Models;
 using Microsoft.AspNet.Mvc;
 using CoreNetDevelopment.ViewModels;
-using Microsoft.AspNet.Http.Features;
 using Microsoft.AspNet.Identity;
 
 namespace CoreNetDevelopment.Controllers
 {
-    public class Account : Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public Account(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login(string returnUrl = "")
         {
             var model = new LoginViewModel
             {
@@ -29,7 +28,6 @@ namespace CoreNetDevelopment.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
             if (ModelState.IsValid)
@@ -40,11 +38,12 @@ namespace CoreNetDevelopment.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(vm.ReturnUrl))
                     {
-                        return RedirectToAction(vm.ReturnUrl);
+                        return Redirect(vm.ReturnUrl);
                     }
                     return RedirectToAction("Index", "Home");
                 }
             }
+            ModelState.AddModelError("", "Incorrect login attempt");
             return View();
         }
 
