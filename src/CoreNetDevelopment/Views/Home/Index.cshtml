@@ -1,10 +1,7 @@
-﻿@using System.Threading.Tasks
-@using CoreNetDevelopment.ViewModels
-@model CoreNetDevelopment.ViewModels.HomeViewModel
+﻿@model CoreNetDevelopment.ViewModels.HomeViewModel
 
 <h1>Welcome!</h1>
-<h3>@Model.CurrentGreeting</h3>
-<table class="table table-responsive">
+<table class="table table-responsive table-hover">
     <thead>
         <tr>
             <td>Id</td>
@@ -18,7 +15,10 @@
         <tr>
             <td>@restaurant.Id</td>
             <td>@restaurant.Name</td>
-            <td>@Html.ActionLink("Details", "Details", new {id = @restaurant.Id})</td>
+            <td>
+                <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Details" asp-route-id="@restaurant.Id">Details</a>
+                <a class="btn btn-warning btn-sm" asp-controller="Home" asp-action="Edit" asp-route-id="@restaurant.Id">Edit</a>
+            </td>
         </tr>
     }
     </tbody>
