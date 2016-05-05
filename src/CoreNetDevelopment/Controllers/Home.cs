@@ -5,7 +5,6 @@ using CoreNetDevelopment.Services.RestaurantData;
 using CoreNetDevelopment.ViewModels;
 using JetBrains.Annotations;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity.Query.Expressions;
 
 namespace CoreNetDevelopment.Controllers
 {
@@ -69,5 +68,35 @@ namespace CoreNetDevelopment.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await restaurantData.GetAsync(id);
+            if (model == null)
+            {
+                RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(int id, [NotNull]RestaurantEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var restaurant = await restaurantData.GetAsync(id);
+
+                restaurant.Name = model.Name;
+                restaurant.CuisineType = model.CuisineType;
+
+                var result = await restaurantData.Update(restaurant);
+                if (result > 0)
+                {
+                    return RedirectToAction("Details", "Home", new { id = restaurant.Id });
+                }
+            }
+            return View();
+        }
     }
 }

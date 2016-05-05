@@ -30,5 +30,11 @@ namespace CoreNetDevelopment.Services.RestaurantData
             context.Restaurants.Add(restaurant);
             return context.SaveChangesAsync();
         }
+
+        public Task<int> Update(Restaurant restaurant)
+        {
+            context.Restaurants.Update(restaurant);
+            return context.SaveChangesAsync();
+        }
     }
 }

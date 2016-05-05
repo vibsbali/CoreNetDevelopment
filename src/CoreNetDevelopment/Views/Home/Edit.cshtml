@@ -1,23 +1,24 @@
 ﻿@using CoreNetDevelopment.Models
 @model CoreNetDevelopment.Models.Restaurant
 
+@{
+    ViewBag.Title = $"Edit {Model.Name}";
+}
 
 <body>
-    <h1>Create a new restaurant</h1>
+    <h1>Edit @Model.Name</h1>
 
-    @using(Html.BeginForm())
-    {
+    <form asp-action="edit" method="post">
         <div>
-            @Html.LabelFor(r => r.Name)
-            @Html.EditorFor(r => r.Name)
-            <span>@Html.ValidationMessageFor(r => r.Name)</span>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
         </div>
         <div>
-            @Html.LabelFor(r => r.CuisineType)
-            @Html.DropDownListFor(r => r.CuisineType, Html.GetEnumSelectList(typeof (CuisineType)))
+            <label asp-for="CuisineType"></label>
+            <select asp-for="CuisineType" asp-items="@Html.GetEnumSelectList(typeof(CuisineType))"></select>
         </div>
         <div>
             <input type="submit" value="Save Changes" />
         </div>
-    }
+    </form>
 </body>

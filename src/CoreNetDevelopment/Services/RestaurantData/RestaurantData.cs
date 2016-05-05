@@ -41,5 +41,10 @@ namespace CoreNetDevelopment.Services.RestaurantData
                 return 1;
             });
         }
+
+        public Task<int> Update(Restaurant restaurant)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
