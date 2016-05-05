@@ -12,14 +12,7 @@
     <tbody>
     @foreach (var restaurant in Model.Restaurants)
     {
-        <tr>
-            <td>@restaurant.Id</td>
-            <td>@restaurant.Name</td>
-            <td>
-                <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Details" asp-route-id="@restaurant.Id">Details</a>
-                <a class="btn btn-warning btn-sm" asp-controller="Home" asp-action="Edit" asp-route-id="@restaurant.Id">Edit</a>
-            </td>
-        </tr>
+        @Html.Partial("_Summary", restaurant)
     }
     </tbody>
 </table>

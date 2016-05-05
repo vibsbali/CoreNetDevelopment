@@ -1,0 +1,9 @@
+﻿@model CoreNetDevelopment.Models.Restaurant
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>
+        <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+        <a class="btn btn-warning btn-sm" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    </td>
+</tr>
